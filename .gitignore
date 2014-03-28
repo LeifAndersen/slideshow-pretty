@@ -1,0 +1,5 @@
+/planet-docs
+/example.rkt-latex
+**/*~
+**/\#*
+**/.DS_Store
