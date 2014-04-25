@@ -325,11 +325,11 @@
               [else      (apply vc-append `(,distance ,x ,@data))]))
          (if reversed
              (match append
-               ['center-v (scale insert 1 (max 0.001 (- 1 n1)))]
-               [else (scale insert (max 0.001 (- 1 n1)) 1)])
+               ['center-v (scale insert 1 (max 0.001 (- 1 n2)))]
+               [else (scale insert (max 0.001 (- 1 n2)) 1)])
              (match append
-               ['center-v (scale insert 1 (max 0.001 n1))]
-               [else (scale insert (max 0.001 n1) 1)]))))))
+               ['center-v (scale insert 1 (max 0.001 n2))]
+               [else (scale insert (max 0.001 n2) 1)]))))))
 
 (define (transition-slide #:title [title ""] #:reversed [reversed #f]
                       #:append [append 'top] #:distance [distance 0]
