@@ -62,12 +62,13 @@
 (define massive-$$-size 3)
 (define double-massive-$$-size 7)
 
-(define (scode str #:append [append 'left])
+(define (scode #:append [append 'left] . str)
+  (define str* (apply string-append str))
   (apply (match append
            ['left vl-append]
            ['center vc-append])
          `(0 ,@(map (λ (n) (tt n))
-                    (string-split str "\n")))))
+                    (string-split str* "\n")))))
 
 (define (dot str #:small [small #t] #:pretty [pretty #t])
   (if small
