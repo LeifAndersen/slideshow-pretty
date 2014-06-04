@@ -348,6 +348,7 @@
        header (λ (x)
                  (match append
                    ['top      (apply vc-append `(,distance ,x ,@data))]
+                   ['top-l    (apply vl-append `(,distance ,x ,@data))]
                    ['bottom   (apply vc-append `(,distance ,@data ,x))]
                    ['bottom-l (apply vl-append `(,distance ,@data ,x))]
                    ['left     (apply hc-append `(,distance ,x ,@data))]
