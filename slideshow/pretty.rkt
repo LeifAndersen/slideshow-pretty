@@ -68,21 +68,17 @@
       ['left vl-append]
       ['center vc-append])
      v1 v2))
-  (define-values (picture row)
+  (define-values (picture row _)
     (for/fold ([picture (blank)]
-             [row (blank)])
+               [row (blank)]
+               [newline-mode #f])
             ([s str])
-    (match s
-      ["\n" (values (proper-append picture row) (blank))]
-      [s* #:when (string? s*) (values picture (hc-append row (tt s*)))]
-      [else (values picture (hc-append row s))])))
+    (match* (s newline-mode)
+      [("\n" #f) (values (proper-append picture row) (blank) #t)]
+      [("\n" #t) (values (proper-append picture (tt "\n")) row #t)]
+      [(s* _) #:when (string? s*) (values picture (hc-append row (tt s*)) #f)]
+      [(_ _) (values picture (hc-append row s) #f)])))
   (proper-append picture row))
-  ;(define str* (apply string-append str))
-  ;(apply (match append
-  ;         ['left vl-append]
-  ;         ['center vc-append])
-  ;       `(0 ,@(map (λ (n) (tt n))
-  ;                  (string-split str* "\n")))))
 
 (define (dot str #:small [small #t] #:pretty [pretty #t])
   (if small
