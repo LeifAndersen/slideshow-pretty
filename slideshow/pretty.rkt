@@ -63,12 +63,26 @@
 (define double-massive-$$-size 7)
 
 (define (scode #:append [append 'left] . str)
-  (define str* (apply string-append str))
-  (apply (match append
-           ['left vl-append]
-           ['center vc-append])
-         `(0 ,@(map (λ (n) (tt n))
-                    (string-split str* "\n")))))
+  (define (proper-append v1 v2)
+    ((match append
+      ['left vl-append]
+      ['center vc-append])
+     v1 v2))
+  (define-values (picture row)
+    (for/fold ([picture (blank)]
+             [row (blank)])
+            ([s str])
+    (match s
+      ["\n" (values (proper-append picture row) (blank))]
+      [s* #:when (string? s*) (values picture (hc-append row (tt s*)))]
+      [else (values picture (hc-append row s))])))
+  (proper-append picture row))
+  ;(define str* (apply string-append str))
+  ;(apply (match append
+  ;         ['left vl-append]
+  ;         ['center vc-append])
+  ;       `(0 ,@(map (λ (n) (tt n))
+  ;                  (string-split str* "\n")))))
 
 (define (dot str #:small [small #t] #:pretty [pretty #t])
   (if small
