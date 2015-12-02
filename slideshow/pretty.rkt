@@ -196,7 +196,7 @@
    #:title title
    (apply animate-slide `(next ,@data))))
 
-(define (end-pretty-slide #:title [title ""] . data)
+(define (end-pretty-slide #:title [title #f] . data)
   (play-n
    #:skip-first? #f
    #:skip-last? #t
@@ -216,7 +216,7 @@
              (max (+ (* start-size (- 1 n1)) (* end-size n1)) 0.001)))))
 
 
-(define (header-slide #:title [title ""] #:reversed [reversed #f]
+(define (header-slide #:title [title #f] #:reversed [reversed #f]
                       #:append [append 'top] #:distance [distance 0]
                       #:fade-in [fade-in #t] #:fade-out [fade-out #t]
                       #:left [left ""] #:right [right ""]
@@ -342,7 +342,7 @@
                ['center-v (scale insert 1 (max 0.001 n1))]
                [else (scale insert (max 0.001 n1) 1)]))))))
 
-(define (transition-slide #:title [title ""] #:reversed [reversed #f]
+(define (transition-slide #:title [title #f] #:reversed [reversed #f]
                       #:append [append 'top] #:distance [distance 0]
                       #:left [left ""] #:right [right ""]
                       #:header [header ""] . data)
